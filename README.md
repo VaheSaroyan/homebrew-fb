@@ -89,3 +89,13 @@ References
 [cla]: https://code.facebook.com/cla
 [style]: https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Formula-Cookbook.md
 [documentation]: https://github.com/Homebrew/homebrew/tree/master/share/doc/homebrew#readme
+
+# Ios network plugin change
+I believe this is due to internal changes to iOS 14, i am doing local patch for FLEXNetworkObserver.mm in SKIOSNetworkPlugin pod at line 335
+```swift
+    if(className == NULL){
+            className = NSClassFromString([@[ @"__", @"NSC", @"FLocalS", @"ession", @"Task" ]
+                componentsJoinedByString:@""]);
+    }
+    ```
+read the comments in start of method to understand the struggle with different ios version, I am sure Flipper devs will comeup with proper impl.
